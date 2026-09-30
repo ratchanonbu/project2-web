@@ -1,8 +1,652 @@
-<html>
-  <body>
-  <h1> Hello, I am a CMUBS students.</h1>
-  <script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="NL9Uakh3LUM92_i032FRv";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanBites - อาหารคลีน สลัด & เครื่องดื่มสุขภาพ</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4A6B5D;       /* Sage Green */
+            --primary-light: #8BA89B; /* Soft Sage */
+            --accent: #E07A5F;        /* Terracotta Warm Accent */
+            --bg-body: #F9F8F6;       /* Soft Cream White */
+            --bg-card: #FFFFFF;
+            --text-main: #2C3531;
+            --text-sub: #666666;
+            --tag-bg: #EAF0EC;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navbar & Logo Header */
+        .header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid #EAEAEA;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        /* Hero / Value Proposition */
+        .hero {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-body) 100%);
+        }
+
+        .value-prop {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--text-main);
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .value-highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Container & Section Styling */
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 0 1.2rem 4rem 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin: 3rem 0 1.5rem 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #E0E0E0;
+        }
+
+        /* Catalog Grid */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        /* Product Card Design */
+        .product-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #F0F0F0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .badge-kcal {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .product-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.4rem;
+        }
+
+        .product-desc {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 0.8rem;
+            border-top: 1px dashed #EAEAEA;
+        }
+
+        .product-price {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Customer Activity & Store Section Style */
+        .order-section {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 20px;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            margin-top: 4rem;
+            box-shadow: 0 10px 30px rgba(74, 107, 93, 0.2);
+        }
+
+        .order-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .order-section > p {
+            font-size: 1rem;
+            color: #E2ECE9;
+            margin-bottom: 1.8rem;
+            font-weight: 300;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(5px);
+            padding: 1.5rem 1rem;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+            color: #FFFFFF;
+        }
+
+        .contact-card p {
+            font-size: 0.85rem;
+            color: #E2ECE9;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .btn-line {
+            display: inline-block;
+            background-color: #06C755;
+            color: white;
+            padding: 0.6rem 1.4rem;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-line:hover {
+            background-color: #05b34c;
+            transform: scale(1.03);
+        }
+
+        .btn-map, .btn-phone {
+            display: inline-block;
+            background-color: #FFFFFF;
+            color: var(--primary);
+            padding: 0.6rem 1.4rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-map:hover, .btn-phone:hover {
+            background-color: var(--bg-body);
+            transform: scale(1.03);
+        }
+
+        .map-container {
+            width: 100%;
+            max-width: 850px;
+            margin: 2rem auto 0 auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            border-top: 1px solid #EAEAEA;
+            background: var(--bg-card);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Logo -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="CleanBites Logo" class="logo-img">
+            <span class="brand-name">CleanBites</span>
+        </div>
+    </header>
+
+    <!-- 1. Value Proposition -->
+    <section class="hero">
+        <p class="value-prop">
+            <span class="value-highlight">Fuel your day with clean meals.</span><br>
+            ดูแลตัวเองง่ายๆ ทุกวัน ด้วยมื้ออาหารคลีนแคลต่ำ และสมูทตี้สดชื่น
+        </p>
+    </section>
+
+    <div class="container">
+
+        <!-- 2. Catalog (15 เมนู) -->
+
+        <!-- หมวดที่ 1: Main Course (5 เมนู) -->
+        <h2 class="section-title">🍱 อาหารจานหลัก (Main Courses)</h2>
+        <div class="catalog-grid">
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="chicken1.jpeg" class="product-img" alt="อกไก่นุ่มย่าง">
+                    <span class="badge-kcal">340 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">อกไก่หมักสมุนไพรซอสพริกไทยดำ & ข้าวไรซ์เบอร์รีออร์แกนิก (Black Pepper Charcoal-Grilled Chicken & Riceberry)</div>
+                        <p class="product-desc">อกไก่เนื้อนุ่มหมักสมุนไพรย่างเตาถ่านหอมๆ ราดซอสพริกไทยดำรสเข้มข้น กลมกล่อม เสิร์ฟคู่ข้าวไรซ์เบอร์รีร้อนๆ บรอกโคลี และฟักทองนึ่งหวานธรรมชาติ</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">89 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="salmon2.jpg" class="product-img" alt="สเต๊กแซลมอน">
+                    <span class="badge-kcal">410 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">สเต๊กแซลมอนนอร์เวย์ย่างเกลือชมพู (Norwegian Grilled Salmon with Pink Salt)</div>
+                        <p class="product-desc">แซลมอนนอร์เวย์สดนำเข้า ย่างไร้น้ำมันให้หนังกรอบเนื้อฉ่ำ โรยเกลือชมพูช่วยชูรสหวานธรรมชาติของเนื้อปลา ท็อปด้วยเลมอนสดและผักชีลาว เสิร์ฟพร้อมมันหวานญี่ปุ่นนึ่ง</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">149 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="chicken3.jpg" class="product-img" alt="บาวล์ไก่เทริยากิ">
+                    <span class="badge-kcal">380 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">ข้าวไก่เทริยากิโซเดียมต่ำ & ไข่ต้มยางมะตูม (Low-Sodium Teriyaki Chicken Bowl with Soft-Boiled Egg)</div>
+                        <p class="product-desc">อกไก่ชิ้นโตนุ่มฉ่ำ ราดซอสเทริยากิสูตรพิเศษหวานน้อยโซเดียมต่ำ ท็อปบนข้าวผสมควิโนอุดมสารอาหาร เสิร์ฟพร้อมไข่ต้มยางมะตูมเยิ้มๆ และขิงดั่งสไตล์ญี่ปุ่น</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">95 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="shrimp4.jpg" class="product-img" alt="กุ้งย่างปาปริก้า">
+                    <span class="badge-kcal">320 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">กุ้งแม่น้ำย่างซอสปาปริก้าบาร์บีคิว & ข้าวกล้องไรซ์เบอร์รี (Paprika Grilled River Prawns with Brown Rice)</div>
+                        <p class="product-desc">กุ้งแม่น้ำตัวโตเนื้อเด้ง ย่างซอสปาปริก้าหอมกลิ่นพริกอบอวล รสชาติเผ็ดหวานกำลังดี เสิร์ฟคู่ผักย่างรวมมิตรและข้าวกล้องอุดมไฟเบอร์</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">129 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="pasta16.jpg" class="product-img" alt="พาสต้าโฮลวีต">
+                    <span class="badge-kcal">360 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">พาสต้าเพนเน่โฮลวีตซอสมะเขือเทศสดโฮมเมด (Whole Wheat Penne with Homemade Fresh Tomato Sauce)</div>
+                        <p class="product-desc">เส้นเพนเน่โฮลวีตเหนียวนุ่ม เคี่ยวกับซอสมะเขือเทศสดสูตรโฮมเมดรสเข้มข้น ไม่ใส่สารกันบูดและน้ำตาลทราย แต่งหน้าด้วยไมโครกรีนเพิ่มความสดชื่น</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">99 ฿</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- หมวดที่ 2: Salads & Bowls (3 เมนู) -->
+        <h2 class="section-title">🥗 สลัด & โบวล์สดชื่น (Salads & Bowls)</h2>
+        <div class="catalog-grid">
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="avocado6.webp" class="product-img" alt="อโวคาโดสลัด">
+                    <span class="badge-kcal">280 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">อะโวคาโดฮาส & ควิโนสามสีซูเปอร์ฟู้ดบาวล์ (Hass Avocado & Organic Quinoa Superfood Bowl)</div>
+                        <p class="product-desc">อะโวคาโดสายพันธุ์ฮาสเนื้อนุ่มมัน ผสานควิโนสามสีออร์แกนิกและผักกรอบสดชื่น ราดด้วยน้ำสลัดงาญี่ปุ่นยูสุหอมเปรี้ยวกลมกล่อม</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">119 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="salad7.jpg" class="product-img" alt="ซีซาร์สลัดคลีน">
+                    <span class="badge-kcal">250 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">กรีตโยเกิร์ตซีซาร์สลัดอกไก่อบกรอบ (Crispy Chicken Caesar Salad with Greek Yogurt Dressing)</div>
+                        <p class="product-desc">ผักคอสออร์แกนิกสดกรอบ คลุกเคล้าอกไก่อบกรอบและเบคอนไร้มัน ท็อปด้วยพาร์เมซานชีส ราดน้ำสลัดซีซาร์สูตรกรีกโยเกิร์ตแคลต่ำแต่รสชาติเข้มข้น</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">89 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="salad8.jpg" class="product-img" alt="เต้าหู้สลัด">
+                    <span class="badge-kcal">220 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">สลัดเต้าหู้คินุนุ่มสด & ถั่วแระญี่ปุ่นพอนสึยูสุ (Japanese Kinu Tofu & Edamame Ponzu Salad)</div>
+                        <p class="product-desc">เต้าหู้ญี่ปุ่นเนื้อนุ่ม ถั่วแระญี่ปุ่นสด และน้ำสลัดพอนสึส้มยูซุ</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">79 ฿</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- หมวดที่ 3: Healthy Snacks (3 เมนู) -->
+        <h2 class="section-title">🍌 ของว่างคลีนทานเล่น (Healthy Snacks)</h2>
+        <div class="catalog-grid">
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="greek9.jpg" class="product-img" alt="กรีกโยเกิร์ต">
+                    <span class="badge-kcal">180 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">กรีตโยเกิร์ตโฮมเมดโปรตีนสูง & มิกซ์เบอร์รีสด (High-Protein Homemade Greek Yogurt with Fresh Berries)</div>
+                        <p class="product-desc">กรีตโยเกิร์ตเนื้อแน่นเข้มข้นสูตรโฮมเมด โปรตีนสูง โรยท็อปปิ้งเบอร์รีสดฉ่ำๆ โกโก้นิบส์ มะพร้าวอบกรอบ และราดน้ำผึ้งป่าแท้ 100%</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">69 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="bread10.jpg" class="product-img" alt="ขนมปังโฮลวีต">
+                    <span class="badge-kcal">150 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">ปังโฮลวีตนึ่ง & สังขยาใบเตยนมพิสตาชิโอไร้น้ำตาล (Steamed Whole Wheat Bread with Sugar-Free Pandan Custard)</div>
+                        <p class="product-desc">ขนมปังโฮลวีตธัญพืช 100% นึ่งนุ่มๆ หอมกรุ่น เสิร์ฟคู่สังขยาใบเตยแท้สูตรไร้น้ำตาล เคี่ยวด้วยนมพิสตาชิโอละมุน หวานกลมกล่อมด้วยหญ้าหวานธรรมชาติ</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">55 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="bar11.webp" class="product-img" alt="กราโนล่าบาร์">
+                    <span class="badge-kcal">130 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">เอเนอร์จีบาร์ธัญพืชรวม & อัลมอนด์คั่วธรรมชาติ (Artisanal Whole Grain & Roasted Almond Energy Bar)</div>
+                        <p class="product-desc">สแน็กบาร์พลังงานสูง ทำจากข้าวโอ๊ต เมล็ดฟักทอง อัลมอนด์คั่ว และผลไม้อบแห้ง หวานธรรมชาติ 100% จากอินทผลัม ไร้น้ำตาลเติมแต่ง กรอบอร่อยเคี้ยวเพลิน</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">45 ฿</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- หมวดที่ 4: Drinks & Smoothies (4 เมนู) -->
+        <h2 class="section-title">🥤 เครื่องดื่ม & สมูทตี้สดชื่น (Drinks & Smoothies)</h2>
+        <div class="catalog-grid">
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="smootiestraw12.jpg" class="product-img" alt="สมูทตี้สตรอว์เบอร์รี">
+                    <span class="badge-kcal">140 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">สตรอว์เบอร์รีอาซาอิโกลว์สมูทตี้ สูตรผิวใส (Strawberry Açaí Glow Superfood Smoothie)</div>
+                        <p class="product-desc">สมูทตี้รวมพลังความสดชื่นจากสตรอว์เบอร์รีสด อาซาอิเบอร์รีซูเปอร์ฟู้ด และน้ำมะพร้าวสด 100% ปั่นแบบไร้น้ำตาล ท็อปด้วยกราโนล่ากรุบกรอบ อร่อยสดชื่น ได้ประโยชน์เต็มแก้ว</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">85 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="green13.jpg" class="product-img" alt="น้ำสกัดเย็น Green Detox">
+                    <span class="badge-kcal">90 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">น้ำผักผลไม้สกัดเย็นกสิกรสูตรกรีนดีท็อกซ์ (Organic Green Detox Cold-Pressed Juice)</div>
+                        <p class="product-desc">น้ำผักผลไม้สกัดเย็น 100% รวมประโยชน์จากผักโขม แอปเปิ้ลเขียว เซเลอรี และมะนาวสด ไม่ผสมน้ำและน้ำตาล ช่วยดีท็อกซ์ร่างกายและเติมความสดชื่นระหว่างวัน</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">75 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="kombucha14.jpg" class="product-img" alt="ชาหมักคอมบูฉะ">
+                    <span class="badge-kcal">45 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">คอมบูฉะชาหมักโพรไบโอติกส์ธรรมชาติ รสพีชสดชื่น (Sparkling Peach Probiotic Kombucha)</div>
+                        <p class="product-desc">ชาหมักหมักด้วยจุลินทรีย์โพรไบโอติกส์สายพันธุ์ดี อุดมด้วยกรดธรรมชาติ รสพีชหอมหวานซ่ากำลังดี ช่วยปรับสมดุลระบบย่อยอาหาร สดชื่น ดื่มง่ายได้ทุกวัน</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">65 ฿</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-wrap">
+                    <img src="matcha15.jpg" class="product-img" alt="มัทฉะคลีน">
+                    <span class="badge-kcal">70 kcal</span>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">มัทฉะลาเต้นมโอ๊ตออร์แกนิกเย็น สูตรไร้น้ำตาล (Iced Organic Uji Matcha Oat Milk Latte)</div>
+                        <p class="product-desc">ผงมัทฉะเกรดพิธีชงชาแท้ 100% ส่งตรงจากอุจิ ชิซูโอกะ ประเทศญี่ปุ่น ชงผสมกับนมโอ๊ตสูตรเข้มข้น ไร้น้ำตาลเติมแต่ง ได้รสสัมผัสหอมกลมกล่อม นุ่มลึก ละมุนลิ้น</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">79 ฿</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Customer Activity & Store Location (3 ช่องทาง) -->
+        <section class="order-section">
+            <h2>ติดต่อสั่งซื้อ & แวะมาทานที่หน้าร้าน</h2>
+            <p>เลือกช่องทางที่คุณสะดวก ทั้งสั่งออนไลน์ จัดส่งถึงบ้าน หรือแวะมาทานที่สาขา</p>
+
+            <div class="contact-grid">
+                <!-- ช่องทางที่ 1: LINE OA -->
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3>สั่งซื้อออนไลน์</h3>
+                    <p>สั่งอาหารล่วงหน้า 1 วัน หรือปรึกษาโภชนาการฟรี</p>
+                    <a href="https://line.me" target="_blank" class="btn-line">แอด LINE OA</a>
+                </div>
+
+                <!-- ช่องทางที่ 2: หน้าร้าน & Google Maps -->
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>พิกัดหน้าร้าน</h3>
+                    <p>โครงการ Nimman One เชียงใหม่<br>เปิดทุกวัน: 07:30 - 20:00 น.</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn-map">ดูแผนที่ Google Maps</a>
+                </div>
+
+                <!-- ช่องทางที่ 3: เบอร์โทรสั่งซื้อ -->
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>สอบถามคอร์สปิ่นโต</h3>
+                    <p>สอบถามรายละเอียดคอร์สอาหารรายสัปดาห์/เดือน</p>
+                    <a href="tel:0123456789" class="btn-phone">โทร 012-345-6789</a>
+                </div>
+            </div>
+
+            <!-- ฝัง Google Maps หน้าร้าน -->
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3777.202353112444!2d98.9654!3d18.7961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDQ3JzQ2LjAiTiA5OMKwNTcnNTUuNCJF!5e0!3m2!1sth!2sth!4v1620000000000!5m2!1sth!2sth" 
+                    width="100%" 
+                    height="240" 
+                    style="border:0; border-radius: 14px;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 CleanBites Healthy Food - 703311 Information Systems for Business</p>
+    </footer>
+
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="6bG4dkBnlPxRthLK-zB8U";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
-  </body>
+</body>
 </html>
